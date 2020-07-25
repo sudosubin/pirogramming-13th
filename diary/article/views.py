@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from article.models import Article
 
@@ -17,4 +17,32 @@ def create(request):
         return render(request, 'article/create.html', context={})
 
     # POST
-    return render(request, 'article/create.html', context={})
+    title = request.POST['title']
+    content = request.POST['content']
+    article = Article.objects.create(title=title, content=content)
+
+    pk = article.id
+    return redirect(to='/article/{}/'.format(pk))
+
+
+def retrieve(request, pk):
+    article = Article.objects.get(id=pk)
+
+    context = {
+        'article': article
+    }
+
+    return render(request, 'article/retrieve.html', context=context)
+
+
+def update(request, pk):
+    article = Article.objects.get(id=pk)
+
+    # GET
+    if request.method == 'GET':
+        context = {
+            'article': article
+        }
+        return render(request, 'article/update.html', context=context)
+
+    return render(request, 'article/update.html', context={})
