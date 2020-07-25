@@ -1,7 +1,17 @@
 <h1>일기 쓰기</h1>
 
-<form action="/create" method="POST">
-  <input type="text" name="title" />
-  <textarea name="content"></textarea>
+<form action="/create/" method="POST">
+  {% csrf_token %}
 
+  제목:
+  <input type="text" name="title" />
+  <br />
+  <br />
+
+  내용:
+  <textarea name="content"></textarea>
+  <br />
+  <br />
+
+  <input type="submit" value="글 쓰기" />
 </form>

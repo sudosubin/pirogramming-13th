@@ -12,4 +12,9 @@ def index(request):
 
 
 def create(request):
+    # GET
+    if request.method == 'GET':
+        return render(request, 'article/create.html', context={})
+
+    # POST
     return render(request, 'article/create.html', context={})
