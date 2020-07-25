@@ -45,4 +45,13 @@ def update(request, pk):
         }
         return render(request, 'article/update.html', context=context)
 
-    return render(request, 'article/update.html', context={})
+    # request에서 받아온 내용들
+    title = request.POST['title']
+    content = request.POST['content']
+
+    # 데이터베이스에 바꿀 내용들
+    article.title = title
+    article.content = content
+    article.save()
+
+    return redirect(to='/article/{}/'.format(pk))
