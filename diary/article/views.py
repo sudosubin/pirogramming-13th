@@ -1,3 +1,15 @@
 from django.shortcuts import render
 
-# Create your views here.
+from article.models import Article
+
+
+def index(request):
+    queryset = Article.objects.all()
+    context = {
+        'articles': queryset,
+    }
+    return render(request, 'article/index.html', context=context)
+
+
+def create(request):
+    return render(request, 'article/create.html', context={})
