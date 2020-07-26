@@ -2,5 +2,5 @@
 
 <p>{{ article.content }}</p>
 
-<a href="">수정하기</a>
-<a href="">삭제하기</a>
+<a href="{% url 'article:update' pk=article.id %}">수정하기</a>
+<a href="{% url 'article:delete' pk=article.id %}">삭제하기</a>
