@@ -61,7 +61,12 @@ def update(request, pk):
 
 def delete(request, pk):
     article = Article.objects.get(id=pk)
-    article.delete()
 
-    url = reverse('article:list')
+    if request.method == 'POST':
+        article.delete()
+
+        url = reverse('article:list')
+        return redirect(to=url)
+
+    url = reverse('article:retrieve', kwargs={'pk': pk})
     return redirect(to=url)

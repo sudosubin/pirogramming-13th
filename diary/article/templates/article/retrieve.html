@@ -2,5 +2,9 @@
 
 <p>{{ article.content }}</p>
 
-<a href="{% url 'article:update' pk=article.id %}">수정하기</a>
-<a href="{% url 'article:delete' pk=article.id %}">삭제하기</a>
+<button><a href="{% url 'article:update' pk=article.id %}">수정하기</a></button>
+
+<form action="{% url 'article:delete' pk=article.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제하기" />
+</form>
